@@ -6,13 +6,13 @@ pipeline {
             steps {
                 script {
                     // Stop and remove all running containers
-                    docker.withServer('http://157.245.243.215:80') {
+                    docker.withServer('tcp://localhost:80') {
                         sh 'docker stop $(docker ps -aq)'
                         sh 'docker rm $(docker ps -aq)'
                     }
 
                     // Delete all Docker images
-                    docker.withServer('http://157.245.243.215:80') {
+                    docker.withServer('tcp://localhost:80') {
                         sh 'docker rmi $(docker images -q)'
                     }
                 }
