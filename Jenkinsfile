@@ -7,12 +7,16 @@ pipeline {
                 script {
                     // Stop and remove all running containers
                     docker.withServer('tcp://localhost:80') {
+                        sh '''
+                        #!/bin/sh
                         sh 'docker stop $$(docker ps -aq)'
                         sh 'docker rm $$(docker ps -aq)'
                     }
 
                     // Delete all Docker images
                     docker.withServer('tcp://localhost:80') {
+                        sh '''
+                        #!/bin/sh
                         sh 'docker rmi $$(docker images -q)'
                     }
                 }
