@@ -1,9 +1,6 @@
 pipeline {
     agent any
     
-   pipeline {
-    agent any
-    
     stages {
         stage('Cleanup Docker') {
             steps {
@@ -40,5 +37,4 @@ pipeline {
             }
         }
     }
-}
 }
