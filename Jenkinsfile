@@ -1,6 +1,9 @@
 pipeline {
     agent any
     
+   pipeline {
+    agent any
+    
     stages {
         stage('Cleanup Docker') {
             steps {
@@ -17,21 +20,24 @@ pipeline {
                     }
                 }
             }
+        }
+        
+        // Add other stages here to build and run Docker containers
+        // ...
         stage('Build Docker Image') {
-          
+            steps {
                 script {
-                    def dockerfile = 'Dockerfile'
+                    def dockerfile = 'Dockerfile.dev'
                     docker.build('my-image-name:latest', "-f ${dockerfile} .")
-                
+                }
             }
         }
         stage('Run Docker Container') {
-            
+            steps {
                 script {
-                    docker.image('my-image-name:latest').run('-p 80:80')
+                    docker.image('my-image-name:latest').run('-p 8080:80')
                 }
-        
+            }
         }
     }
- }
-}    
+}
