@@ -5,7 +5,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('my-image-name:latest', '-f Dockerfile .')
+                    def dockerfile = 'Dockerfile'
+                    docker.build('my-image-name:latest', "-f ${dockerfile} .")
                 }
             }
         }
